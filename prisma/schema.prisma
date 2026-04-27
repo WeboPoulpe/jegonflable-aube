@@ -1,0 +1,156 @@
+// Schéma Prisma — Jegonflable Aube
+// Doc : https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// =========================================
+// USER — admins du back-office + onboarding
+// =========================================
+model User {
+  id                    String    @id @default(cuid())
+  email                 String    @unique
+  password              String
+  name                  String?
+  role                  Role      @default(ADMIN)
+
+  // Champs onboarding "chasse au trésor"
+  onboardingStep        Int       @default(0)
+  onboardingCompletedAt DateTime?
+
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  quoteHistory          QuoteHistory[]
+}
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+}
+
+// =========================================
+// GAME — jeux gonflables
+// =========================================
+model Game {
+  id           String      @id @default(cuid())
+  slug         String      @unique
+  name         String
+  type         GameType
+  description  String      @db.Text
+  pricePerDay  Decimal     @db.Decimal(10, 2)
+  capacity     Int
+  ageMin       Int         @default(3)
+  ageMax       Int         @default(12)
+  width        Float
+  length       Float
+  height       Float
+  weight       Float?
+  photoUrl     String
+  galleryUrls  String[]    @default([])
+  isPublished  Boolean     @default(false)
+  isFeatured   Boolean     @default(false)
+
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  quoteItems   QuoteItem[]
+}
+
+enum GameType {
+  CHATEAU
+  PARCOURS
+  TOBOGGAN
+  COMBO
+  SPORT
+  AUTRE
+}
+
+// =========================================
+// QUOTE — devis client
+// =========================================
+model Quote {
+  id              String         @id @default(cuid())
+  reference       String         @unique
+  status          QuoteStatus    @default(PENDING)
+
+  customerName    String
+  customerEmail   String
+  customerPhone   String
+  customerAddress String
+
+  startDate       DateTime
+  endDate         DateTime
+  message         String?        @db.Text
+
+  totalPrice      Decimal        @db.Decimal(10, 2)
+  deposit         Decimal        @db.Decimal(10, 2) @default(0)
+
+  stripeSessionId String?
+  paidAt          DateTime?
+
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  items           QuoteItem[]
+  history         QuoteHistory[]
+}
+
+enum QuoteStatus {
+  PENDING
+  CONFIRMED
+  PAID
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+// =========================================
+// QUOTE_ITEM — lignes de devis
+// =========================================
+model QuoteItem {
+  id              String   @id @default(cuid())
+  quoteId         String
+  gameId          String
+
+  // Snapshot au moment de la commande (immuable)
+  gameNameSnapshot String
+  pricePerDaySnapshot Decimal @db.Decimal(10, 2)
+
+  days            Int
+  lineTotal       Decimal  @db.Decimal(10, 2)
+
+  quote           Quote    @relation(fields: [quoteId], references: [id], onDelete: Cascade)
+  game            Game     @relation(fields: [gameId], references: [id])
+}
+
+// =========================================
+// QUOTE_HISTORY — audit trail
+// =========================================
+model QuoteHistory {
+  id        String      @id @default(cuid())
+  quoteId   String
+  userId    String?
+  fromStatus QuoteStatus?
+  toStatus   QuoteStatus
+  comment   String?     @db.Text
+  createdAt DateTime    @default(now())
+
+  quote     Quote       @relation(fields: [quoteId], references: [id], onDelete: Cascade)
+  user      User?       @relation(fields: [userId], references: [id])
+}
+
+// =========================================
+// SETTING — paramètres globaux clé/valeur
+// =========================================
+model Setting {
+  key       String   @id
+  value     String   @db.Text
+  updatedAt DateTime @updatedAt
+}
