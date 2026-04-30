@@ -1,58 +1,23 @@
 import Link from "next/link";
-import { Sparkles, ArrowRight, Star, ShieldCheck, Truck } from "lucide-react";
+import { Star, ShieldCheck, Truck, ArrowRight } from "lucide-react";
 
-// Coquille minimale de la page d'accueil pour la Phase 2.
-// La version complète (HeroSection, Catalogue, Témoignages, etc.)
-// sera implémentée en Phase 4.
+export const dynamic = "force-dynamic";
+import { db } from "@/lib/db";
+import { HeroSection } from "@/components/public/HeroSection";
+import { GameCard } from "@/components/public/GameCard";
+import { HowItWorks } from "@/components/public/HowItWorks";
+import { Testimonials } from "@/components/public/Testimonials";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const featuredGames = await db.game.findMany({
+    where: { isPublished: true, isFeatured: true },
+    take: 4,
+    orderBy: { createdAt: "desc" },
+  });
+
   return (
     <>
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-cream via-primary-50 to-accent/20 py-20">
-        <div className="mx-auto max-w-5xl px-6 text-center">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/70 px-4 py-2 text-sm font-bold text-primary-700 shadow-sm backdrop-blur">
-            <Sparkles className="h-4 w-4 text-accent-500" />
-            Location à Troyes et toute l'Aube
-          </div>
-
-          {/*
-            Note pour Maxime — l'attribut data-secret ci-dessous correspond à
-            l'étape 4 de l'onboarding (le stagiaire utilise les DevTools du
-            navigateur pour le découvrir). Ne pas retirer.
-          */}
-          <h1
-            data-secret="BLEU3DA9FC"
-            className="mb-6 font-heading text-6xl font-bold leading-tight text-primary-900 md:text-7xl"
-          >
-            Faites <span className="text-primary">rebondir</span>
-            <br />
-            vos plus beaux moments
-          </h1>
-
-          <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-700">
-            Châteaux gonflables, parcours d'obstacles, toboggans géants…
-            Trouvez le jeu parfait pour l'anniversaire de votre enfant ou votre
-            événement.
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link
-              href="/jeux"
-              className="group flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-primary-600 px-8 py-4 font-heading text-lg font-bold text-white shadow-lg transition hover:scale-105 hover:shadow-xl"
-            >
-              Voir nos jeux
-              <ArrowRight className="h-5 w-5 transition group-hover:translate-x-1" />
-            </Link>
-            <Link
-              href="/devis"
-              className="rounded-full border-2 border-primary bg-white px-8 py-4 font-heading text-lg font-bold text-primary transition hover:bg-primary-50"
-            >
-              Devis gratuit
-            </Link>
-          </div>
-        </div>
-      </section>
+      <HeroSection />
 
       {/* Avantages */}
       <section className="py-16">
@@ -90,14 +55,65 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA temporaire pour onboarding */}
+      {/* Jeux phares */}
+      {featuredGames.length > 0 && (
+        <section className="bg-cream py-16">
+          <div className="mx-auto max-w-7xl px-6">
+            <div className="mb-10 flex items-end justify-between">
+              <div>
+                <h2 className="mb-2 font-heading text-4xl font-bold text-primary-900">
+                  Nos jeux stars
+                </h2>
+                <p className="text-gray-600">
+                  Les plus demandés cette saison.
+                </p>
+              </div>
+              {/* BUG-09 : le lien "Tout voir" pointe vers /jeu au lieu de /jeux.
+                  Conséquence : clic → page 404 (Next.js ne trouve pas /jeu).
+                  Bug visible : le visiteur clique en haut à droite et tombe sur
+                  une page d'erreur. */}
+              <Link
+                href="/jeu"
+                className="hidden items-center gap-1 rounded-full border-2 border-primary px-4 py-2 font-heading font-bold text-primary hover:bg-primary-50 sm:inline-flex"
+              >
+                Tout voir
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+              {featuredGames.map((g) => (
+                <GameCard
+                  key={g.id}
+                  slug={g.slug}
+                  name={g.name}
+                  type={g.type}
+                  description={g.description}
+                  pricePerDay={Number(g.pricePerDay)}
+                  capacity={g.capacity}
+                  ageMin={g.ageMin}
+                  ageMax={g.ageMax}
+                  width={g.width}
+                  length={g.length}
+                  photoUrl={g.photoUrl}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <HowItWorks />
+      <Testimonials />
+
+      {/* CTA temporaire pour onboarding stagiaire */}
       <section className="mx-auto max-w-3xl px-6 pb-16">
         <div className="rounded-3xl border-4 border-dashed border-accent/50 bg-accent/10 p-8 text-center">
           <h2 className="mb-2 font-heading text-2xl font-bold text-primary-800">
             👋 Stagiaire ? Commence par ton onboarding !
           </h2>
           <p className="mb-4 text-sm text-gray-700">
-            5 énigmes à résoudre avant d'attaquer la chasse aux 40 bugs.
+            9 énigmes à résoudre avant la chasse aux 40 bugs.
           </p>
           <Link
             href="/onboarding"

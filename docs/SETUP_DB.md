@@ -78,7 +78,33 @@ Si tout va bien, tu verras :
 🚀 Your database is now in sync with your Prisma schema.
 ```
 
-> 🐛 **Si tu as une erreur « Environment variable not found: DATABASE_URL »** : c'est qu'il y a une **typo quelque part dans le code**. Cherche bien (un des 40 bugs de ta vraie mission t'attend ici 👀). Indice : `lib/db.ts`.
+---
+
+### 🐛 Très probable : tu vas tomber sur un bug volontaire ici
+
+Cette commande **ne va pas marcher du premier coup**. C'est voulu. Un bug volontaire t'attend dans le code et te bloquera tant que tu ne l'auras pas trouvé.
+
+**Indices, à dévoiler progressivement :**
+
+<details><summary>🔍 Indice 1 (vague)</summary>
+
+> Lis attentivement le message d'erreur. Il te dit ce qu'il cherche et qu'il ne trouve pas.
+
+</details>
+
+<details><summary>🔍 Indice 2 (plus précis)</summary>
+
+> Prisma utilise une variable d'environnement précise pour savoir où se trouve ta DB. Le nom **standard** de cette variable est très connu — vérifie qu'elle est bien orthographiée **partout** dans le code, pas juste dans `.env.local`.
+
+</details>
+
+<details><summary>💡 Indice 3 (presque la réponse)</summary>
+
+> Ouvre `lib/db.ts`. Compare le nom de la variable d'environnement utilisée avec celui du `.env.local`. Une lettre manque quelque part.
+
+</details>
+
+> 🎉 Quand tu auras corrigé ce bug, fais un commit (`git commit -m "🐛 fix(db): corrige typo DATABASE_URL"`). C'est ton **deuxième bug officiellement éliminé** (le premier était la typo du footer).
 
 ---
 
