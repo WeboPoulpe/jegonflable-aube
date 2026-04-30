@@ -3,8 +3,8 @@ import nodemailer from "nodemailer";
 // =========================================
 // Configuration SMTP Brevo
 // =========================================
-// Sera utilisée par les Server Actions devis,
-// contact, etc. (Phase 3 + Phase 4).
+// Utilisée par les Server Actions devis,
+// contact, etc.
 // =========================================
 
 const transporter = nodemailer.createTransport({
@@ -38,7 +38,6 @@ export async function sendEmail({ to, subject, html, text }: SendEmailOptions) {
 
 // =========================================
 // Email de confirmation de devis
-// (utilisé en Phase 4 par actions/quotes.ts)
 // L'objet contient le code MAILMASTER pour
 // l'onboarding étape 9.
 // =========================================
@@ -48,7 +47,6 @@ export async function sendQuoteConfirmation(opts: {
   reference: string;
   totalPrice: number;
 }) {
-  // Note: l'objet contient "code: MAILMASTER" pour valider l'onboarding étape 9.
   const subject = `🎪 Confirmation de devis Jegonflable Aube — code: MAILMASTER (réf ${opts.reference})`;
 
   const html = `
@@ -64,10 +62,38 @@ export async function sendQuoteConfirmation(opts: {
     </div>
   `;
 
+  // BUG-06 : l'email est envoyé à l'admin au lieu du client.
+  // Conséquence : le client ne reçoit jamais la confirmation,
+  // mais l'admin est spammé. Et l'étape 9 onboarding ne valide pas.
   return sendEmail({
-    to: opts.to,
+    to: process.env.ADMIN_EMAIL ?? opts.to,
     subject,
     html,
     text: `Bonjour ${opts.customerName}, nous avons bien reçu votre devis ${opts.reference}. Total estimé : ${opts.totalPrice.toFixed(2)} €.`,
+  });
+}
+
+// Email de notification à l'admin (lui c'est OK qu'il reçoive)
+export async function sendAdminNewQuoteNotification(opts: {
+  reference: string;
+  customerName: string;
+  customerEmail: string;
+  totalPrice: number;
+}) {
+  const adminEmail = process.env.ADMIN_EMAIL;
+  if (!adminEmail) return;
+
+  return sendEmail({
+    to: adminEmail,
+    subject: `🆕 Nouveau devis ${opts.reference} — ${opts.customerName}`,
+    html: `
+      <div style="font-family:Arial,sans-serif">
+        <h2>Nouveau devis reçu</h2>
+        <p><strong>Réf :</strong> ${opts.reference}</p>
+        <p><strong>Client :</strong> ${opts.customerName} (${opts.customerEmail})</p>
+        <p><strong>Total :</strong> ${opts.totalPrice.toFixed(2)} €</p>
+        <p><a href="${process.env.NEXT_PUBLIC_SITE_URL}/admin/devis">Voir dans le back-office</a></p>
+      </div>
+    `,
   });
 }

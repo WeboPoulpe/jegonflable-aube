@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git pull *)",
+      "Bash(echo \"EXIT=$?\")",
+      "Bash(DATABASE_URL=\"postgresql://fake:fake@localhost:5432/fake\" NEXTAUTH_SECRET=\"dev\" NEXTAUTH_URL=\"http://localhost:3000\" npx next build)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)"
+    ]
+  }
+}
