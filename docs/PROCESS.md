@@ -25,11 +25,11 @@ Coche au fur et à mesure dans le README ou ici. Ne saute pas d'étape.
 - [ ] **Projet cloné** : `git clone https://github.com/WeboPoulpe/jegonflable-aube.git`
 - [ ] **Dépendances installées** : `npm install`
 - [ ] **Serveur lancé** : `npm run dev` → http://localhost:3000
-- [ ] **Étape 1** Onboarding — Lis ta mission (READ ME) → code `JEGONFLABLE`
-- [ ] **Étape 2** Onboarding — Le murmure du terminal → code `PRISMA42`
-- [ ] **Étape 3** Onboarding — Le secret du jardinier → code `SEEDMASTER`
-- [ ] **Étape 4** Onboarding — L'œil du designer → code `BLEU3DA9FC`
-- [ ] **Étape 5** Onboarding — Ton premier bug (BUG-01 footer) → code `PREMIERPAS`
+- [ ] **Étape 1** Onboarding — Lis ta mission (README) → 🔑 trouve le code et saisis-le
+- [ ] **Étape 2** Onboarding — Le murmure du terminal → 🔑 trouve le code et saisis-le
+- [ ] **Étape 3** Onboarding — Le secret du jardinier → 🔑 trouve le code et saisis-le
+- [ ] **Étape 4** Onboarding — L'œil du designer → 🔑 trouve le code et saisis-le
+- [ ] **Étape 5** Onboarding — Ton premier bug (BUG-01 footer) → 🔑 trouve le code et saisis-le
 
 > 🏆 Trophées attendus à la fin du jour 1 : **5 trophées** (Lecteur de docs, Souffleur de terminal, Maître jardinier, Inspecteur du DOM, Tueur de bug).
 
@@ -48,9 +48,9 @@ Coche au fur et à mesure dans le README ou ici. Ne saute pas d'étape.
 - [ ] `DATABASE_URL` collée dans `.env.local`
 - [ ] Toutes les autres variables remplies (`NEXTAUTH_SECRET`, `NEXTAUTH_URL`, etc.)
 - [ ] `npm run db:push` lance et termine sans erreur
-- [ ] `npm run db:seed` affiche `🎉 Seed terminé !` ET le code `NEONLIGHT`
+- [ ] `npm run db:seed` affiche `🎉 Seed terminé !` ET un code à la dernière ligne
 - [ ] `npm run db:studio` ouvre l'interface et tu vois les 8 jeux
-- [ ] **Code `NEONLIGHT`** saisi dans onboarding étape 6 → trophée **🐘 Architecte de bases**
+- [ ] 🔑 **Trouve le code secret** et saisis-le dans onboarding étape 6 → trophée **🐘 Architecte de bases**
 
 > ⚠️ **Si erreur "Environment variable not found: DATABASE_URL"** : c'est un bug volontaire (BUG-03) dans `lib/db.ts`. Cherche bien.
 
@@ -66,10 +66,10 @@ Coche au fur et à mesure dans le README ou ici. Ne saute pas d'étape.
 - [ ] Repo perso `jegonflable-aube` créé en **Private**
 - [ ] Personal Access Token GitHub généré (ou GitHub Desktop installé)
 - [ ] `.env.local` **bien absent** de `git status` (vérification critique 🔒)
-- [ ] Premier commit avec message exact : `🚀 first commit — code: GITHUB42`
+- [ ] Premier commit créé avec le message exact donné dans le guide
 - [ ] Remote ajoutée + `git push -u origin main` réussi
 - [ ] Tu vois ton code en ligne sur github.com/<ton-username>/jegonflable-aube
-- [ ] **Code `GITHUB42`** saisi dans onboarding étape 7 → trophée **🌿 Cerveau Git**
+- [ ] 🔑 **Trouve le code secret** et saisis-le dans onboarding étape 7 → trophée **🌿 Cerveau Git**
 
 > 🚨 **Workflow obligatoire à partir de maintenant** : un commit par bug corrigé. Format : `🐛 fix(zone): description (BUG-XX)`.
 
@@ -87,8 +87,8 @@ Coche au fur et à mesure dans le README ou ici. Ne saute pas d'étape.
 - [ ] `NEXTAUTH_URL` et `NEXT_PUBLIC_SITE_URL` mises à jour avec l'URL Vercel
 - [ ] **Redeploy** lancé après mise à jour des variables
 - [ ] Tu peux ouvrir ton site depuis ton smartphone 📱
-- [ ] La route `https://TON-SITE.vercel.app/api/onboarding/vercel-check` répond `{ "code": "VERCELONLINE" }`
-- [ ] **Code `VERCELONLINE`** saisi dans onboarding étape 8 → trophée **🚀 Pilote Vercel** (Légendaire)
+- [ ] La route `https://TON-SITE.vercel.app/api/onboarding/vercel-check` répond avec un code dans le JSON
+- [ ] 🔑 **Trouve le code secret** et saisis-le dans onboarding étape 8 → trophée **🚀 Pilote Vercel** (Légendaire)
 
 > 🔁 **À partir de maintenant** : chaque `git push` vers `main` redéploie automatiquement le site en ~2 min.
 
@@ -104,8 +104,8 @@ Coche au fur et à mesure dans le README ou ici. Ne saute pas d'étape.
 - [ ] `ADMIN_EMAIL` = ton email perso (pour pouvoir tester)
 - [ ] Serveur dev redémarré (`Ctrl+C` puis `npm run dev`)
 - [ ] Formulaire `/devis` rempli avec ton email perso
-- [ ] **Email reçu** dans ta boîte (ou tes spams !) avec sujet contenant `code: MAILMASTER`
-- [ ] **Code `MAILMASTER`** saisi dans onboarding étape 9 → trophée **📬 Facteur du web**
+- [ ] **Email reçu** dans ta boîte (ou tes spams !) — un code se cache dans l'objet
+- [ ] 🔑 **Trouve le code secret** et saisis-le dans onboarding étape 9 → trophée **📬 Facteur du web**
 
 > ⚠️ **Si tu ne reçois pas l'email** : c'est probablement un bug volontaire (BUG-06). Le code est OK, mais l'email part au mauvais endroit. Cherche dans `lib/email.ts`.
 

@@ -86,17 +86,9 @@ Une fois ton site en ligne, va sur :
 https://TON-SITE.vercel.app/api/onboarding/vercel-check
 ```
 
-Tu vas voir un JSON :
+Tu vas voir un JSON qui contient un champ `code` avec une valeur en MAJUSCULES.
 
-```json
-{
-  "deployed": true,
-  "code": "VERCELONLINE",
-  "message": "Bravo ! Ton site est en ligne sur Vercel."
-}
-```
-
-Le `code` est ce que tu dois saisir dans l'étape 8 de l'onboarding.
+🔑 **Trouve ce code dans le JSON** et recopie-le dans l'étape 8 de l'onboarding.
 
 > ℹ️ **Cette route ne marche que sur Vercel** (elle vérifie la variable `process.env.VERCEL`). En local elle renvoie `deployed: false`.
 

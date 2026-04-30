@@ -121,13 +121,9 @@ npm run db:studio
 
 ## 7. Récupère ton code de l'étape 🔑
 
-À la fin du log de `npm run db:seed`, regarde le tout dernier message dans le terminal. Tu y verras une ligne du genre :
+À la fin du log de `npm run db:seed`, regarde le tout dernier message dans le terminal. Tu y verras une ligne avec un emoji 🏆 et un code secret en MAJUSCULES.
 
-```
-🏆 Code étape 6 : NEONLIGHT
-```
-
-Recopie ce code dans la page d'onboarding étape 6.
+🔑 **À toi de le trouver** dans le terminal et de le recopier dans la page d'onboarding étape 6.
 
 ---
 

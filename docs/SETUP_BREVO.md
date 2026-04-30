@@ -72,13 +72,13 @@ Puis **Redeploy**.
 
 ## 6. Récupère ton code de l'étape 🔑
 
-L'email reçu a comme **objet** :
+L'email reçu a comme **objet** quelque chose comme :
 
 ```
-🎪 Confirmation de devis Jegonflable Aube — code: MAILMASTER
+🎪 Confirmation de devis Jegonflable Aube — code: XXXXXXXX (réf JG-2026-...)
 ```
 
-Le mot juste après `code:` est ton code à saisir dans l'onboarding étape 9.
+🔑 **Trouve le mot juste après `code:`** dans l'objet de l'email — c'est ton code à saisir dans l'onboarding étape 9.
 
 ---
 

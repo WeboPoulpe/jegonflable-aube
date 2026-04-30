@@ -61,10 +61,10 @@ Tu vas voir une grosse liste de fichiers en rouge (« Untracked files »). C'est
 
 ```bash
 git add .
-git commit -m "🚀 first commit — code: GITHUB42"
+git commit -m "🚀 first commit"
 ```
 
-> ⚠️ **Recopie le message EXACTEMENT** comme ci-dessus (avec l'emoji, le tiret, les espaces). C'est le message qui débloque l'étape.
+> 💡 Astuce : préfixe tes commits avec un emoji (🚀 feat, 🐛 fix, 📝 docs, 💄 style). Ça permet de comprendre l'historique d'un coup d'œil.
 
 ---
 
@@ -115,11 +115,7 @@ git push -u origin main
 
 Recharge ton repo sur github.com. Tu dois voir tous tes fichiers, et **1 commit** dans l'historique.
 
-Clique sur l'onglet **Commits** : tu verras ton commit avec le message :
-
-```
-🚀 first commit — code: GITHUB42
-```
+🔑 **Trouve ton code secret** : explore ton repo en ligne. Quelque part dans le projet, dans le dossier caché `.github/`, il y a un fichier d'onboarding spécifique à cette étape qui te révèle le code à saisir.
 
 ---
 
