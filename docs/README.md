@@ -25,6 +25,19 @@ Chaque guide est l'équivalent d'1 jour de travail. Suis-les **dans l'ordre**.
 
 ---
 
+## 🆘 Tu as cassé un fichier ? Ton Vercel plante ?
+
+👉 **[`POST_CORRECTION.md`](./POST_CORRECTION.md)** — Guide de remise au propre
+
+Ce guide t'explique comment :
+- Sauvegarder tes vraies corrections de bugs
+- Reset les fichiers que tu as accidentellement modifiés
+- Récupérer le code propre depuis le repo officiel de Max
+- Configurer correctement Vercel
+- Diagnostiquer les 5 erreurs Vercel les plus courantes
+
+---
+
 ## 🎯 Ordre de lecture recommandé
 
 ```
